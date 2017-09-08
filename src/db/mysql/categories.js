@@ -2,12 +2,12 @@ const categories = deps => {
   return {
     all: () => {
       return new Promise((resolve, reject) => {
-        const { connection } = deps
+        const { connection, errorHandler } = deps
         connection.query('SELECT * FROM categories;', (error, results) => {
           if (!error) {
             resolve({ categories: results })
           } else {
-            reject(error)
+            errorHandler(error, 'Erro ao listar as categorias', reject)
           }
         })
       })

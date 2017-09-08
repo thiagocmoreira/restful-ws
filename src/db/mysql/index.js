@@ -9,7 +9,12 @@ var connection = mysql.createConnection({
 
 connection.connect()
 
-const categoryModule = require('./categories')({ connection })
+const errorHandler = (error, msg, rejectFunction) => {
+  console.log(error)
+  rejectFunction({ error: msg })
+}
+
+const categoryModule = require('./categories')({ connection, errorHandler })
 
 module.exports = {
   categories: () => categoryModule
