@@ -12,7 +12,18 @@ const categories = deps => {
         })
       })
     },
-    save: (name) => {},
+    save: (name) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+        connection.query('INSERT INTO categories (name) VALUES (?)', [name], (error, results) => {
+          if (!error) {
+            resolve({ category: { id: results.insertId, name } })
+          } else {
+            errorHandler(error, `Erro ao salvar a categoria ${name}`, reject)
+          }
+        })
+      })
+    },
     update: (id, name) => {},
     del: (id) => {}
   }
