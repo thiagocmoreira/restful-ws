@@ -1,3 +1,3 @@
 const server = require('./server/index')
 
-server.listen('8081')
+server.listen('8080')

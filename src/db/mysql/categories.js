@@ -24,8 +24,30 @@ const categories = deps => {
         })
       })
     },
-    update: (id, name) => {},
-    del: (id) => {}
+    update: (id, name) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+        connection.query('UPDATE categories SET name = ? WHERE id = ?', [name, id], (error, results) => {
+          if (!error) {
+            resolve({ category: { id, name } })
+          } else {
+            errorHandler(error, `Erro ao atualizar a categoria ${name}`, reject)
+          }
+        })
+      })
+    },
+    del: (id) => {
+      return new Promise((resolve, reject) => {
+        const { connection, errorHandler } = deps
+        connection.query('DELETE FROM categories WHERE id = ?', [id], (error, results) => {
+          if (!error) {
+            resolve({ category: { id: id } })
+          } else {
+            errorHandler(error, `Erro ao atualizar a categoria de id ${id}`, reject)
+          }
+        })
+      })
+    }
   }
 }
 
