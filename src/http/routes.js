@@ -1,12 +1,16 @@
-const routes = (server) => {
-  server.get('/', (req, res, next) => {
-    res.send('Welcome!')
-    next()
-  })
+const categories = require('../db/mysql/index')
 
+const routes = (server) => {
   server.get('category', (req, res, next) => {
-    res.send([1, 'Test'])
-    next()
+    categories
+      .then(categories => {
+        res.send(categories)
+        next()
+      })
+      .catch(error => {
+        res.send(error)
+        next()
+      })
   })
 
   server.post('category', (req, res, next) => {
@@ -23,6 +27,11 @@ const routes = (server) => {
   //   res.send()
   //   next()
   // })
+
+  server.get('/', (req, res, next) => {
+    res.send('Welcome!')
+    next()
+  })
 }
 
 module.exports = routes
