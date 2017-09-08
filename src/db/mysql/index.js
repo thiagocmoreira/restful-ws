@@ -9,14 +9,8 @@ var connection = mysql.createConnection({
 
 connection.connect()
 
-const categories = new Promise((resolve, reject) => {
-  connection.query('SELECT * FROM categories;', (error, results) => {
-    if (!error) {
-      resolve({ categories: results })
-    } else {
-      reject(error)
-    }
-  })
-})
+const categoryModule = require('./categories')({ connection })
 
-module.exports = categories
+module.exports = {
+  categories: () => categoryModule
+}

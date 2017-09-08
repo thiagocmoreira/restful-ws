@@ -1,8 +1,8 @@
-const categories = require('../db/mysql/index')
+const db = require('../db/mysql/index')
 
 const routes = (server) => {
-  server.get('category', (req, res, next) => {
-    categories
+  server.get('categories', (req, res, next) => {
+    db.categories().all()
       .then(categories => {
         res.send(categories)
         next()
