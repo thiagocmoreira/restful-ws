@@ -1,16 +1,14 @@
 const db = require('../db/mysql/index')
 
 const routes = (server) => {
-  server.get('categories', (req, res, next) => {
-    db.categories().all()
-      .then(categories => {
-        res.send(categories)
-        next()
-      })
-      .catch(error => {
-        res.send(error)
-        next()
-      })
+  server.get('categories', async (req, res, next) => {
+    try {
+      res.send(await db.categories().all())
+      next()
+    } catch (error) {
+      res.send(error)
+      next()
+    }
   })
 
   server.post('category', (req, res, next) => {
