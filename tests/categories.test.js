@@ -8,24 +8,24 @@ const create = () => categories.save('Category Test')
 
 // Success paths
 
-test('List Categories', async t => {
+test('List', async t => {
   await create()
   const result = await categories.all()
   t.is(result.categories.length, 1)
 })
 
-test('Create Category', async t => {
+test('Create', async t => {
   const result = await create()
   t.is(result.category.name, 'Category Test')
 })
 
-test('Edit Category', async t => {
+test('Edit', async t => {
   await create()
   const result = await categories.update(1, 'Category Edited')
   t.is(result.category.name, 'Category Edited')
 })
 
-test('Delete Category', async t => {
+test('Delete', async t => {
   await create()
   const result = await categories.del(1)
   t.is(result.category.id, 1)
