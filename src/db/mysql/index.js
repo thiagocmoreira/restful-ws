@@ -14,8 +14,8 @@ const errorHandler = (error, msg, rejectFunction) => {
   rejectFunction({ error: msg })
 }
 
-const categoryModule = require('./categories')({ connection, errorHandler })
-const usersModule = require('./users')({ connection, errorHandler })
+const categoryModule = require('../../api/category')({ connection, errorHandler })
+const usersModule = require('../../api/user')({ connection, errorHandler })
 
 module.exports = {
   categories: () => categoryModule,

@@ -84,7 +84,7 @@ const routes = (server) => {
   // Main
 
   server.get('/', (req, res, next) => {
-    res.send('Welcome!')
+    res.send('Welcome to Restful-WS!')
     next()
   })
 }
